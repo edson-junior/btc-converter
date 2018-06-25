@@ -21,9 +21,9 @@ var convertBTC = function () {
             _context.next = 3;
             return request(url).then(function (body) {
               var apiResponse = JSON.parse(body);
-              return console.info('1 BTC to ' + currency + ' = ' + apiResponse.price); // eslint-disable-line
+              return console.info(amount + ' BTC to ' + currency + ' = ' + apiResponse.price); // eslint-disable-line
             }).catch(function (err) {
-              console.info('Something went wrong in the API. Try in a few minutes.');
+              console.info('Something went wrong in the API. Try in a few minutes.'); // eslint-disable-line
               return err;
             });
 
