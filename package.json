@@ -63,6 +63,7 @@
     "ajv": "^5.0.0",
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
+    "ora": "^2.1.0",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5"
   }

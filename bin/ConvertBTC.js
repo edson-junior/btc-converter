@@ -18,16 +18,22 @@ var convertBTC = function () {
         switch (_context.prev = _context.next) {
           case 0:
             url = 'https://apiv2.bitcoinaverage.com/convert/global?from=BTC&to=' + currency + '&amount=' + amount;
-            _context.next = 3;
+
+
+            spinner.start();
+
+            _context.next = 4;
             return request(url).then(function (body) {
+              spinner.stop();
               var apiResponse = JSON.parse(body);
               return console.info(chalk.red(amount) + ' BTC to ' + chalk.cyan(currency) + ' = ' + chalk.yellow(apiResponse.price)); // eslint-disable-line
             }).catch(function (err) {
+              spinner.stop();
               console.info(chalk.red('Something went wrong in the API. Try in a few minutes.')); // eslint-disable-line
               return err;
             });
 
-          case 3:
+          case 4:
           case 'end':
             return _context.stop();
         }
@@ -44,5 +50,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var request = require('request-promise-native');
 var chalk = require('chalk');
+var ora = require('ora');
+
+var spinner = ora({
+  text: 'Loading data...',
+  color: 'red'
+});
 
 module.exports = convertBTC;
