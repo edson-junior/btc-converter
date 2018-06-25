@@ -1,5 +1,5 @@
-const { expect } = require('chai');
-const { exec } = require('child_process');
+const expect = require('chai').expect;
+const exec = require('child_process').exec;
 const btcConverter = './src/main.js';
 const pkg = require('../package.json');
 

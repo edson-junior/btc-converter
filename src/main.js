@@ -11,4 +11,4 @@ program
   .option('-A, --amount <amount>', 'Value in Bitcoins to convert. (Default: 1)')
   .parse(process.argv);
 
-console.log(convertBTC(program.currency, program.amount)); // eslint-disable-line
+convertBTC(program.currency, program.amount); // eslint-disable-line

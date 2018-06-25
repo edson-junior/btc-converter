@@ -12,30 +12,27 @@ describe('ConvertBTC', () => {
   let consoleStub;
 
   const responseMock = {
-    "time": "2018-06-23 18:44:12",
-    "success": true,
-    "price": 6142.77
-  }
+    time: "2018-06-23 18:44:12",
+    success: true,
+    price: 6142.77,
+  };
 
   beforeEach(() => {
-    consoleStub = sinon.stub(console, 'log');
+    consoleStub = sinon.stub(console, 'info');
   });
 
   afterEach(() => {
-    console.log.restore();
+    consoleStub.restore();
   });
 
-  it('should use currency USD and 1 as default amount', (done) => {
+  it('should use currency USD and 1 as default amount', async () => {
     nock('https://apiv2.bitcoinaverage.com')
       .get('/convert/global')
       .query({ from: 'BTC', to: 'USD', amount: 1 })
       .reply(200, responseMock);
 
-    convertBTC();
+    await convertBTC();
 
-    setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith('1 BTC to USD = 6142.77');
-      done();
-    }, 300);
+    expect(consoleStub).to.have.been.calledWith('1 BTC to USD = 6142.77');
   });
 });
