@@ -25,13 +25,13 @@ describe('ConvertBTC', () => {
     console.log.restore();
   });
 
-  it('should use currency USD and 1 as default amount', () => {
+  it('should use currency USD and 1 as default amount', (done) => {
     nock('https://apiv2.bitcoinaverage.com')
       .get('/convert/global')
       .query({ from: 'BTC', to: 'USD', amount: 1 })
       .reply(200, responseMock);
 
-    convertBTC('USD', 10);
+    convertBTC();
 
     setTimeout(() => {
       expect(consoleStub).to.have.been.calledWith('1 BTC to USD = 6142.77');
