@@ -21,9 +21,9 @@ var convertBTC = function () {
             _context.next = 3;
             return request(url).then(function (body) {
               var apiResponse = JSON.parse(body);
-              return console.info(amount + ' BTC to ' + currency + ' = ' + apiResponse.price); // eslint-disable-line
+              return console.info(chalk.red(amount) + ' BTC to ' + chalk.cyan(currency) + ' = ' + chalk.yellow(apiResponse.price)); // eslint-disable-line
             }).catch(function (err) {
-              console.info('Something went wrong in the API. Try in a few minutes.'); // eslint-disable-line
+              console.info(chalk.red('Something went wrong in the API. Try in a few minutes.')); // eslint-disable-line
               return err;
             });
 
@@ -43,5 +43,6 @@ var convertBTC = function () {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var request = require('request-promise-native');
+var chalk = require('chalk');
 
 module.exports = convertBTC;

@@ -1,5 +1,6 @@
 const nock = require('nock');
 const chai = require('chai');
+const chalk = require('chalk');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const expect = chai.expect;
@@ -33,7 +34,7 @@ describe('ConvertBTC', () => {
 
     await convertBTC();
 
-    expect(consoleStub).to.have.been.calledWith('1 BTC to USD = 6142.77');
+    expect(consoleStub).to.have.been.calledWith(`${chalk.red(1)} BTC to ${chalk.cyan('USD')} = ${chalk.yellow(6142.77)}`);
   });
 
 
@@ -45,6 +46,26 @@ describe('ConvertBTC', () => {
 
     await convertBTC('USD', 10);
 
-    expect(consoleStub).to.have.been.calledWith('10 BTC to USD = 6142.77');
+    expect(consoleStub).to.have.been.calledWith(`${chalk.red(10)} BTC to ${chalk.cyan('USD')} = ${chalk.yellow(6142.77)}`);
+  });
+
+  it('should use currency BRL and 1 as amount default', async () => {
+    nock('https://apiv2.bitcoinaverage.com')
+      .get('/convert/global')
+      .query({ from: 'BTC', to: 'BRL', amount: 1 })
+      .reply(200, responseMock);
+
+    await convertBTC('BRL');
+    expect(consoleStub).to.have.been.calledWith(`${chalk.red(1)} BTC to ${chalk.cyan('BRL')} = ${chalk.yellow(6142.77)}`);
+  });
+
+  it('should message user when api reply with error', async () => {
+    nock('https://apiv2.bitcoinaverage.com')
+      .get('/convert/global')
+      .query({ from: 'BTC', to: 'BRL', amount: 1 })
+      .replyWithError('Error');
+
+    await convertBTC('BRL');
+    expect(consoleStub).to.have.been.calledWith(chalk.red('Something went wrong in the API. Try in a few minutes.'));
   });
 });
