@@ -9,7 +9,7 @@ async function convertBTC(currency = 'USD', amount = 1) {
       return console.info(`1 BTC to ${currency} = ${apiResponse.price}`); // eslint-disable-line
     })
     .catch((err) => {
-      console.info('Something went wrong in the API. Try in a few minutes.');
+      console.info('Something went wrong in the API. Try in a few minutes.'); // eslint-disable-line
       return err;
     });
 }
