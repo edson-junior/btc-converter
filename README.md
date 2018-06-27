@@ -2,6 +2,8 @@
 
 A CLI tool that converts bitcoins to any currency provided
 
+![Example CLI running](example.gif)
+
 ### Installing
 
 Install the dependencies
