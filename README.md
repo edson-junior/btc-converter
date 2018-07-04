@@ -1,8 +1,8 @@
 # btc-converter
 
-> 💰A CLI tool that converts bitcoins to any currency provided
-
 ![Example CLI running](example.gif)
+
+> 💰A CLI tool that converts bitcoins to any currency provided
 
 ### Installing
 
